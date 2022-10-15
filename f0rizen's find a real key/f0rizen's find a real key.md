@@ -15,7 +15,9 @@ Firstly I used GDB to get the main function. while reading thorugh the main func
 ```
 which means it is a for loop and the iterative variable is taking values from 0 to 20 which means its doing something to the input value.
 
-now I jumped to radare and checked for human readable strings and found a string "sup3r_s3cr3t_k3y_1337" which is conviniently 21 letters long. also found another set of 21 random letters.Now i jumped to ghidra and while analysing the decompiled code found that some operation is been done between both the string i found.
+now I jumped to radare and checked for human readable strings and found a string "sup3r_s3cr3t_k3y_1337" which is conviniently 21 letters long,also found another set of 21 random letters.
+
+Now i jumped to ghidra and while analysing the decompiled code found that some operation is been done between both the string i found.
 
 from the above picture it is clear that 0x22 is decreased from each letter in the "super secret" ,ASCII wise, and the result of this is XORed with our input to get the other string. So if i just XORed the result and the second string i will get the input. so made this python script which reverse this process.
 
