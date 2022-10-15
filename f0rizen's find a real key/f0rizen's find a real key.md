@@ -43,3 +43,7 @@ print(''.join(key))
 ```
 
 On running the process u will get a string ```flag{_y0upf0undwkey_}```. Just change p and w to '_' and u will the key.
+
+## KEY
+
+The key is ```flag{_y0u_f0und_key_}```
