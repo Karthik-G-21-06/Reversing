@@ -15,10 +15,31 @@ Firstly I used GDB to get the main function. while reading thorugh the main func
 ```
 which means it is a for loop and the iterative variable is taking values from 0 to 20 which means its doing something to the input value.
 
-now I jumped to radare and checked for human readable strings and found a string ```sup3r_s3cr3t_k3y_1337``` which is conviniently 21 letters long,also found another set of 21 random letters ```7?/v+b(!4 wbH'u VjhNh```.
+now I jumped to radare and checked for human readable strings. 
+<p align="center">
+  <img src="https://github.com/Karthik-G-21-06/Reversing/blob/main/f0rizen's%20find%20a%20real%20key/ss-1.png" width="750" title="hover text">
+</p>
+
+found a string ```sup3r_s3cr3t_k3y_1337``` which is conviniently 21 letters long,also found another set of 21 random letters ```7?/v+b(!4 wbH'u VjhNh```.
 
 Now i jumped to ghidra and while analysing the decompiled code found that some operation is been done between both the string i found.
 
+<p align="center">
+  <img src="https://github.com/Karthik-G-21-06/Reversing/blob/main/f0rizen's%20find%20a%20real%20key/ss-2.png" width="750" title="hover text">
+</p>
+
 from the above picture it is clear that 0x22 is decreased from each letter in the ```sup3r_s3cr3t_k3y_1337``` ,ASCII wise, and the result of this is XORed with our input to get the other string. So if i just XORed the result and the second string i will get the input. so made this python script which reverse this process.
+
+```
+s="sup3r_s3cr3t_k3y_1337"
+v="7?/v+b(!4 wbH'u VjhNh"
+new=[]
+key=[]
+for i in range(21):   
+    new.append(ord(s[i])-0x22)
+for j in range(21):
+    key.append(chr(ord(v[j])^new[j]))
+print(''.join(key))
+```
 
 On running the process u will get a string ```flag{_y0upf0undwkey_}```. Just change p and w to '_' and u will the key.
